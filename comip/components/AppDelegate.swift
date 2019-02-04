@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  comip
+//  comicatalog
 //
-//  Created by subdiox on 2019/02/04.
+//  Created by subdiox on 2019/01/12.
 //  Copyright © 2019 Yuta Ooka. All rights reserved.
 //
 
@@ -15,6 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let ud = UserDefaults.standard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        if let _ = ud.string(forKey: "cookie") {
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "Home")
+            self.window?.rootViewController = initialViewController
+        } else {
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "Login")
+            self.window?.rootViewController = initialViewController
+        }
+        self.window?.makeKeyAndVisible()
+        
         // Override point for customization after application launch.
         return true
     }
